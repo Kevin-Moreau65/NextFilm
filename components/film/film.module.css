@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@media (min-width: 536px) and (max-width: 768px) {
+    .bouton, .boutonMobile {
+        aspect-ratio: 7/10 !important;
+        border-radius: 8px !important;
+    }
+    .main {
+        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)) !important;
+    }
+    .bouton h2, .boutonMobile .divH2 {
+        font-size: 1.1em !important;
+    }
+}
+
+@media (max-width: 535px) {
+    .bouton, .boutonMobile {
+        aspect-ratio: 7/10 !important;
+        border-radius: 8px !important;
+    }
+    .main {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+    }
+    .bouton h2, .boutonMobile .divH2 {
+        font-size: 0.9em !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .main {
+        grid-template-columns: repeat(auto-fill, minmax(355px, 1fr)) !important;
+    }
+}
+
+.bouton {
+    display: flex;
+    color: white;
+    background-size: 100% 100%;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    z-index: 1;
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.boutonMobile {
+    display: flex;
+    color: white;
+    background-size: 100% 100%;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    position: relative;
+    aspect-ratio: 7/10;
+}
+
+.boutonMobile .divH2 {
+    opacity: 0;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: black;
+    width: 100%;
+    height: 29%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: 0.26s;
+}
+
+.boutonMobile:hover .divH2 {
+    opacity: 1;
+}
+
+.divH2 h4 {
+    display: -webkit-box;
+    white-space: normal;
+    padding: 0;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    -webkit-line-clamp: 2;
+    padding: 10px 11px;
+    height: 84%;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+
+.main {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 7px;
+    column-gap: 10px;
+    margin: 0 10px;
+}
+
+.bouton h2 {
+    opacity: 0;
+    transition: 0.26s;
+    font-size: 1.9em;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    z-index: 2;
+    white-space: pre-line;
+    width: 80%;
+}
+
+.body {
+    background-color: rgb(136, 136, 136);
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+.bouton:hover>h2 {
+    opacity: 0.9;
+}
+
+.bouton:hover>div {
+    transition: 0.26s;
+    filter: brightness(0.4);
+}
