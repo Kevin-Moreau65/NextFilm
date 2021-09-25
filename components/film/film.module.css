@@ -1,36 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
-@media (min-width: 536px) and (max-width: 768px) {
-    .bouton, .boutonMobile {
-        aspect-ratio: 7/10 !important;
-        border-radius: 8px !important;
-    }
-    .main {
-        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)) !important;
-    }
-    .bouton h2, .boutonMobile .divH2 {
-        font-size: 1.1em !important;
-    }
-}
-
-@media (max-width: 535px) {
-    .bouton, .boutonMobile {
-        aspect-ratio: 7/10 !important;
-        border-radius: 8px !important;
-    }
-    .main {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
-    }
-    .bouton h2, .boutonMobile .divH2 {
-        font-size: 0.9em !important;
-    }
-}
-
-@media (min-width: 769px) {
-    .main {
-        grid-template-columns: repeat(auto-fill, minmax(355px, 1fr)) !important;
-    }
-}
-
 .bouton {
     display: flex;
     color: white;
@@ -94,15 +62,6 @@
     -webkit-box-orient: vertical;
 }
 
-.main {
-    display: grid;
-    grid-auto-flow: row;
-    row-gap: 7px;
-    column-gap: 10px;
-    margin: 0 10px;
-    padding-bottom: 10px;
-}
-
 .bouton h2 {
     opacity: 0;
     transition: 0.26s;
@@ -113,13 +72,6 @@
     z-index: 2;
     white-space: pre-line;
     width: 80%;
-}
-
-.body {
-    background-color: rgb(136, 136, 136);
-    position: absolute;
-    width: 100%;
-    top: 0;
 }
 
 .bouton:hover>h2 {

@@ -1,9 +1,13 @@
 import dataJSON from '../json/filmVu.json'
+import Head from 'next/head';
 import Film, { FilmOrSerie } from "../components/film/film";
-import styles from '../components/film/film.module.css'
+import styles from '../styles/indexfilm.module.css'
 function indexfilm({ arrayresult }: any) {
     return (
         <div className={styles.body} key={"ORIGINAL"}>
+            <Head>
+                <title>Film</title>
+            </Head>
             <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des film vu avec la salopette</h1>
             <div className={styles.main} key={"MAIN"}>
                 {arrayresult.map((content: FilmOrSerie) => (
