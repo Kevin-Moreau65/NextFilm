@@ -8,7 +8,6 @@ import { ClientOnly } from '../../global/reponsive/function'
 import ReactDOM from 'react-dom'
 import lol, { GetInfo } from '../filmInfo/filmInfo'
 export type FilmOrSerie = FilmInt & SerieInt
-    const isDesktop = useMediaQuery({ minWidth: 769 })
 function boutonLandscape(props: FilmOrSerie) {
     let Serie = props.name ? true : false
     return (<div id="Imagep2" className={styles.bouton} onClick={() => { ReactDOM.render(<GetInfo content={props} key={props.id}></GetInfo>, document.getElementById("__next")) }}>
