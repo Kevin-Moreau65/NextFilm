@@ -1,6 +1,8 @@
 import { Component } from 'react'
+import { unmountComponentAtNode } from 'react-dom';
 import { FilmOrSerie } from '../film/film'
 import styles from './filmInfo.module.css'
+import { Splitand, Titlesize } from './function';
 function GenreColor(Genre: string) {
     switch (Genre) {
         case "Comédie":
@@ -35,56 +37,82 @@ function GenreColor(Genre: string) {
             return { color: "rgb(22, 181, 115)" }
     }
 }
-function infoFilmRight(props: FilmOrSerie) {
+function DureeH(heure: number) {
+    let h, m;
+    m = 0;
+    h = Math.floor(heure / 60);
+    m = heure - h * 60;
+    return h + " h " + m + " min"
+}
+function infoFilmLeft(props: FilmOrSerie) {
     let Serie = (props.name ? true : false)
     let element: JSX.Element
     if (Serie) {
-        element = (<div className={styles.right}>
-            <h2>TYpe</h2>
+        element = (<div className={styles.left} style={{ backgroundImage: "url(https://image.tmdb.org/t/p/w400/" + props.poster_path + ")" }}>
+            <h2>Type</h2>
             <h3>Série</h3>
             <h2>Titre d&apos;origine</h2>
-            <h3>{props.original_name}</h3>
-            <h2>Pays d&apos;origine</h2>
-            <h3>{props.origin_country}</h3>
+            <h3 style={Titlesize(props.original_name)}>{props.original_name}</h3>
             <h2>Date de sortie</h2>
             <h3>{props.first_air_date}</h3>
             <h2>Note</h2>
-            <h3>{props.vote_average}</h3>
+            <h3>{props.vote_average}/10</h3>
             <h3>Noté par {props.vote_count} personne</h3>
             <h2>Durée</h2>
-            {/* <h3>Durée par episode</h3> */}
-            {/* <h3> Saisons</h3> */}
-            {/* <h3> Nombre d'épisode</h3> */}
+            <h3>Nombre d&apos;épisode : {props.number_of_episodes}</h3>
+            <h3>Durée par episode : {props.episode_run_time[0]}</h3>
+            <h3>Saisons : {props.number_of_seasons}</h3>
+        </div>)
+    } else {
+        element = (<div className={styles.left} style={{ backgroundImage: "url(https://image.tmdb.org/t/p/w400/" + props.poster_path + ")" }}>
+            <h2>Type</h2>
+            <h3>Film</h3>
+            <h2>Titre d&apos;origine</h2>
+            <h3 style={Titlesize(props.original_title)}>{props.original_title}</h3>
+            <h2>Date de sortie</h2>
+            <h3>{props.release_date}</h3>
+            <h2>Note</h2>
+            <h3>{props.vote_average}/10</h3>
+            <h3>Noté par {props.vote_count} personne</h3>
+            <h2>Durée</h2>
+            <h3>{DureeH(props.runtime)}</h3>
         </div>)
     }
+    return element
 }
 export class GetInfo extends Component<{ content: FilmOrSerie }, any, {}> {
     title: string
     constructor(props: any) {
         super(props)
         this.state = {
-            title: props.content.id
+            visible: true
         }
+        this.back = this.back.bind(this);
         this.title = (props.content.title ? props.content.title : props.content.name)
     }
+    back() {
+        this.setState({
+            visible: false
+        })
+    }
     render() {
-        return <div id="Darken" className={styles.Darken}>
-            <div className={styles.infoFilm}>
-                <div className={styles.left} style={{ backgroundImage: "url(https://image.tmdb.org/t/p/w500/" + this.props.content.poster_path + ")" }}>
-                    <h2>Titre Original</h2>
-                    <h3>{this.props.content.original_title ? this.props.content.original_title : this.props.content.original_name}</h3>
-                    <h2></h2>
-                </div>
-                <div className={styles.right}>
-                    <h2>{this.title}</h2>
-                    <div className={styles.genre}>{this.props.content.genres.map((content: any) => (
-                        <h4 key={content.id} style={GenreColor(content.name)}>
-                            {content.name}
-                        </h4>
-                    ))}</div>
-                    <p>
-                        {this.props.content.overview}
-                    </p>
-                </div></div></div>
+        if (this.state.visible) {
+            return <div id="Darken" className={styles.Darken}>
+                <div className={styles.infoFilm}>
+                    {infoFilmLeft(this.props.content)}
+                    <div className={styles.right}>
+                        <h2>{this.title}</h2>
+                        <div className={styles.genre}>{this.props.content.genres.map((content: any, index: number) => (Splitand(content.name, index)))}
+                        </div>
+                        <p>
+                            {this.props.content.overview}
+                        </p>
+                        <h3 className={styles.back} onClick={this.back}>Retour</h3>
+                        <h4 className={styles.more}>{"<<"} En savoir plus</h4>
+                    </div>
+                </div></div>
+        } else {
+            return null
+        }
     }
 }

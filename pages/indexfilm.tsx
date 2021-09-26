@@ -16,6 +16,7 @@ function indexfilm({ arrayresult }: any) {
                     </div>
                 ))}
             </div>
+            <div id="infoFilm"></div>
         </div>
     )
 }

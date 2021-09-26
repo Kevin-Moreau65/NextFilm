@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 .Darken {
-    position: absolute;
+    position: fixed;
     display: flex;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.418);
+    background-color: rgba(0, 0, 0, 0.671);
+    backdrop-filter: blur(5px);
     justify-content: center;
     align-items: center;
+    z-index: 10;
 }
 
 .infoFilm {
@@ -19,6 +24,7 @@
     align-items: stretch;
     flex-direction: row;
     overflow: hidden;
+    z-index: 11;
 }
 
 .infoFilm>div {
@@ -39,6 +45,15 @@
     overflow: hidden;
     cursor: default;
     flex-grow: 1;
+    padding: 0 10px;
+}
+
+.left>h2 {
+    font-family: 'Raleway', sans-serif;
+}
+
+.left>h3 {
+    font-family: 'Roboto', sans-serif;
 }
 
 .left>h3, .left>h2 {
@@ -65,8 +80,15 @@
 }
 
 .right>h3 {
-    animation: more ease-in-out 1s infinite;
-    cursor: default;
+    font-family: 'Roboto', sans-serif;
+}
+
+.right>h2 {
+    font-family: 'Raleway', sans-serif;
+}
+
+.right>p {
+    font-family: 'Roboto', sans-serif;
 }
 
 .right {
@@ -100,4 +122,14 @@
     align-items: center;
     align-content: center;
     flex-direction: row;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.back:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.more {
+    animation: more 2s infinite ease-out;
 }
