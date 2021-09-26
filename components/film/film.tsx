@@ -6,7 +6,7 @@ import { Fragment } from 'react'
 import { Default, Mobile } from '../../global/reponsive/function'
 import { ClientOnly } from '../../global/reponsive/function'
 import ReactDOM from 'react-dom'
-import lol, { GetInfo } from '../filmInfo/filmInfo'
+import { GetInfo } from '../filmInfo/filmInfo'
 export type FilmOrSerie = FilmInt & SerieInt
 function boutonLandscape(props: FilmOrSerie) {
     let Serie = props.name ? true : false
