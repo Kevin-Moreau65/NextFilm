@@ -72,3 +72,10 @@ function GenreColor(Genre: string) {
             return { color: "rgb(22, 181, 115)" }
     }
 }
+export function DureeH(heure: number) {
+    let h, m;
+    m = 0;
+    h = Math.floor(heure / 60);
+    m = heure - h * 60;
+    return h + " h " + m + " min"
+}

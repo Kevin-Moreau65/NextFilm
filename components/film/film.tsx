@@ -17,7 +17,7 @@ function boutonLandscape(props: FilmOrSerie) {
 }
 function boutonMobile(props: FilmOrSerie) {
     let Serie = props.name ? true : false
-    return (<div id="Imagep2" className={styles.boutonMobile} onClick={() => { ReactDOM.render(<GetInfo content={props}></GetInfo>, document.getElementById("infoFilm")) }}>
+    return (<div id="Imagep2" className={styles.boutonMobile} onClick={() => { ReactDOM.render(<GetInfo content={props} key={props.id}></GetInfo>, document.getElementById("infoFilm")) }}>
         <div className={styles.divH2}>
             <h4>{Serie ? props.name : props.title}</h4>
         </div>

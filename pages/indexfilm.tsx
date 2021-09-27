@@ -2,6 +2,7 @@ import dataJSON from '../json/filmVu.json'
 import Head from 'next/head';
 import Film, { FilmOrSerie } from "../components/film/film";
 import styles from '../styles/indexfilm.module.css'
+import { Fragment } from 'react';
 function indexfilm({ arrayresult }: any) {
     return (
         <div className={styles.body} key={"ORIGINAL"}>
@@ -11,9 +12,9 @@ function indexfilm({ arrayresult }: any) {
             <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des film vu avec la salopette</h1>
             <div className={styles.main} key={"MAIN"}>
                 {arrayresult.map((content: FilmOrSerie) => (
-                    <div key={content.id}>
+                    <Fragment key={content.id}>
                         {Film(content)}
-                    </div>
+                    </Fragment>
                 ))}
             </div>
             <div id="infoFilm"></div>
@@ -33,7 +34,7 @@ export const getStaticProps = async () => {
         props: {
             arrayresult,
         },
-        revalidate: 3600
+        revalidate: 30
     }
 }
 export default indexfilm
