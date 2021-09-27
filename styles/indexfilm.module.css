@@ -55,11 +55,10 @@
     width: 100%;
     top: 0;
     overflow-x: hidden;
-}
-
-.body {
-    --scrollbarBG: rgb(136, 136, 136);
-    --thumbBG: rgb(88, 88, 88);
+    scrollbar-width: thin;
+    scrollbar-color: var(--Scrollbar) var(--Background);
+    overflow-y: auto;
+    height: 100%;
 }
 
 .body::-webkit-scrollbar {
@@ -67,20 +66,13 @@
     padding: 0;
 }
 
-.body {
-    scrollbar-width: thin;
-    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-    overflow-y: auto;
-    height: 100%;
-}
-
 .body::-webkit-scrollbar-track {
-    background: var(--scrollbarBG);
+    background: var(--Background);
     width: 10px;
 }
 
 .body::-webkit-scrollbar-thumb {
-    background-color: var(--thumbBG);
+    background-color: var(--Scrollbar);
     border-radius: 5px;
-    border: 3px solid var(--scrollbarBG);
+    border: 3px solid var(--Background);
 }

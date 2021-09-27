@@ -13,18 +13,20 @@
     justify-content: center;
     align-items: center;
     z-index: 10;
+    animation: opacite 0.2s;
 }
 
 .infoFilm {
     width: 80vw;
     height: 79vh;
-    background-color: rgb(104, 104, 104);
+    background-color: var(--Background);
     border-radius: 18px;
     display: flex;
     align-items: stretch;
     flex-direction: row;
     overflow: hidden;
     z-index: 11;
+    animation: entry 0.2s;
 }
 
 .infoFilm>div {
@@ -32,6 +34,7 @@
 }
 
 .left {
+    position: relative;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     display: flex;
@@ -45,7 +48,7 @@
     overflow: hidden;
     cursor: default;
     flex-grow: 1;
-    padding: 0 10px;
+    padding: 0 15px;
 }
 
 .left>h2 {
@@ -60,23 +63,24 @@
     margin: 0;
     z-index: 1;
     opacity: 0;
-    transition: 0.1s;
+    transition: 0.15s;
 }
 
-.left:hover>* {
-    opacity: 0.8;
+.right>p {
+    max-height: 60%;
+    overflow: auto;
 }
 
-.left>h2:first-child:before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgb(0, 0, 0);
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+.left:hover>*:not(img) {
+    opacity: 0.9;
+}
+
+.left:hover>div>img {
+    filter: brightness(0.2);
+}
+
+.left>div>img {
+    transition: 0.15s;
 }
 
 .right>h3 {
@@ -98,6 +102,7 @@
     align-content: center;
     flex-grow: 1;
     padding: 10px;
+    cursor: default;
 }
 
 @keyframes more {
@@ -113,6 +118,34 @@
         transform: translate(+50px, 0px);
         animation-timing-function: ease-in-out
     }
+}
+
+@keyframes entry {
+    from {
+        transform: translate(0px, +50vh) scale(0.3);
+        animation-timing-function: ease-in-out
+    }
+    to {
+        transform: translate(0px, 0px) scale(1);
+        animation-timing-function: ease-in-out
+    }
+}
+
+@keyframes opacite {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.reverseEntry {
+    animation: entry 0.2s reverse !important;
+}
+
+.reverseDarken {
+    animation: opacite 0.2s reverse !important;
 }
 
 .genre {
@@ -132,4 +165,25 @@
 
 .more {
     animation: more 2s infinite ease-out;
+}
+
+.right>p::-webkit-scrollbar {
+    width: 11px;
+    padding: 0;
+}
+
+.right>p {
+    scrollbar-width: thin;
+    scrollbar-color: var(--Scrollbar) var(--Background);
+}
+
+.right>p::-webkit-scrollbar-track {
+    background: var(--Background);
+    width: 10px;
+}
+
+.right>p::-webkit-scrollbar-thumb {
+    background-color: var(--Scrollbar);
+    border-radius: 5px;
+    border: 3px solid var(--Background);
 }

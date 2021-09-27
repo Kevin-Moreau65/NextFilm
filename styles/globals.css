@@ -1,3 +1,8 @@
+:root {
+  --Background: rgb(136, 136, 136);
+  --Scrollbar: rgb(88, 88, 88);
+}
+
 html, body {
   padding: 0;
   margin: 0;

@@ -1,4 +1,5 @@
-import { Component, MouseEventHandler, RefObject } from 'react'
+import { Component, MouseEventHandler } from 'react'
+import Image from 'next/image';
 import { FilmOrSerie } from '../film/film'
 import { Genre } from '../film/filmInterface';
 import styles from './filmInfo.module.css'
@@ -7,7 +8,8 @@ function infoFilmLeft(props: FilmOrSerie) {
     let Serie = (props.name ? true : false)
     let element: JSX.Element
     if (Serie) {
-        element = (<div className={styles.left} style={{ backgroundImage: "url(https://image.tmdb.org/t/p/w400/" + props.poster_path + ")" }}>
+        element = (<div className={styles.left} >
+            <Image alt="" src={"https://image.tmdb.org/t/p/w500/" + props.poster_path} layout="fill" />
             <h2>Type</h2>
             <h3>Série</h3>
             <h2>Titre d&apos;origine</h2>
@@ -19,11 +21,12 @@ function infoFilmLeft(props: FilmOrSerie) {
             <h3>Noté par {props.vote_count} personne</h3>
             <h2>Durée</h2>
             <h3>Nombre d&apos;épisode : {props.number_of_episodes}</h3>
-            <h3>Durée par episode : {props.episode_run_time[0]}</h3>
+            <h3>Durée par episode : {props.episode_run_time[0]} min</h3>
             <h3>Saisons : {props.number_of_seasons}</h3>
         </div>)
     } else {
-        element = (<div className={styles.left} style={{ backgroundImage: "url(https://image.tmdb.org/t/p/w400/" + props.poster_path + ")" }}>
+        element = (<div className={styles.left}>
+            <Image alt="" src={"https://image.tmdb.org/t/p/w500/" + props.poster_path} layout="fill" />
             <h2>Type</h2>
             <h3>Film</h3>
             <h2>Titre d&apos;origine</h2>
