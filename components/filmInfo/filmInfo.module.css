@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
     z-index: 10;
-    animation: opacite 0.2s;
+    /* animation: opacite 0.2s; */
 }
 
 .infoFilm {
@@ -26,7 +26,7 @@
     flex-direction: row;
     overflow: hidden;
     z-index: 11;
-    animation: entry 0.2s;
+    /* animation: entry 0.2s; */
 }
 
 .infoFilm>div {
@@ -131,6 +131,15 @@
     }
 }
 
+.entry-leave {
+    animation: entry 0.5s;
+    animation-direction: reverse;
+}
+
+.entry {
+    animation: entry 0.5s;
+}
+
 @keyframes opacite {
     from {
         opacity: 0;
@@ -140,12 +149,36 @@
     }
 }
 
-.reverseEntry {
-    animation: entry 0.2s reverse !important;
+/* .example-enter {
+    opacity: 0.01;
 }
 
-.reverseDarken {
-    animation: opacite 0.2s reverse !important;
+.example-enter-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+
+.example {} */
+
+.alert-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.alert-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.alert-exit {
+    opacity: 1;
+}
+
+.alert-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
 }
 
 .genre {
