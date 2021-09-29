@@ -2,24 +2,53 @@ import dataJSON from '../json/filmVu.json'
 import Head from 'next/head';
 import Film, { FilmOrSerie } from "../components/film/film";
 import styles from '../styles/indexfilm.module.css'
-import { Fragment } from 'react';
-function indexfilm({ arrayresult }: any) {
-    return (
-        <div className={styles.body} key={"ORIGINAL"}>
-            <Head>
-                <title>Film</title>
-            </Head>
-            <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des film vu avec la salopette</h1>
-            <div className={styles.main} key={"MAIN"}>
-                {arrayresult.map((content: FilmOrSerie) => (
-                    <Fragment key={content.id}>
-                        {Film(content)}
-                    </Fragment>
-                ))}
+import { Component, Fragment } from 'react';
+import opacity from '../components/filmInfo/opacity.module.css'
+import GetInfo from '../components/filmInfo/filmInfo';
+import { CSSTransition } from 'react-transition-group';
+class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: any }> {
+    array: Array<FilmOrSerie>
+    constructor(props: { arrayresult: FilmOrSerie[] }) {
+        super(props)
+        this.array = this.props.arrayresult
+        this.state = {
+            getInfo: false,
+            info: null
+        }
+        this.InfoFilm = this.InfoFilm.bind(this)
+        this.back = this.back.bind(this)
+    }
+    InfoFilm(props: FilmOrSerie) {
+        this.setState({
+            getInfo: true,
+            info: props
+        })
+    }
+    back() {
+        this.setState({
+            getInfo: false
+        })
+    }
+    render() {
+        return (
+            <div className={styles.body} key={"ORIGINAL"}>
+                <Head>
+                    <title>Film</title>
+                </Head>
+                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des film vu avec la salopette</h1>
+                <div className={styles.main} key={"MAIN"}>
+                    {this.array.map((content: FilmOrSerie) => (
+                        <Fragment key={content.id}>
+                            {Film(content, this.InfoFilm)}
+                        </Fragment>
+                    ))}
+                </div>
+                <CSSTransition in={this.state.getInfo} classNames={opacity} timeout={200} unmountOnExit>
+                    <GetInfo content={this.state.info} back={this.back}></GetInfo>
+                </CSSTransition>
             </div>
-            <div id="infoFilm"></div>
-        </div>
-    )
+        )
+    }
 }
 export const getStaticProps = async () => {
     let arrayresult: Array<FilmOrSerie> = []
@@ -37,4 +66,4 @@ export const getStaticProps = async () => {
         revalidate: 30
     }
 }
-export default indexfilm
+export default Indexfilm

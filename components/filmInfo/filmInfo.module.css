@@ -13,7 +13,6 @@
     justify-content: center;
     align-items: center;
     z-index: 10;
-    /* animation: opacite 0.2s; */
 }
 
 .infoFilm {
@@ -160,12 +159,12 @@
 
 .example {} */
 
-.alert-enter {
+.alertEnter {
     opacity: 0;
     transform: scale(0.9);
 }
 
-.alert-enter-active {
+.alertEnterActive {
     opacity: 1;
     transform: translateX(0);
     transition: opacity 300ms, transform 300ms;

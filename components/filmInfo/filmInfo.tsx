@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { FilmOrSerie } from '../film/film'
 import { Genre } from '../film/filmInterface';
 import styles from './filmInfo.module.css'
+import animate from './animate.module.css'
 import { DureeH, NoteColor, Splitand, Titlesize } from './function';
 function infoFilmLeft(props: FilmOrSerie) {
     let Serie = (props.name ? true : false)
@@ -70,41 +71,13 @@ function infoFilmRight(props: FilmOrSerie, back: MouseEventHandler) {
     }
     return element
 }
-export class GetInfo extends Component<{ content: FilmOrSerie }, { visible: boolean }, {}> {
-    title: string
-    constructor(props: { content: FilmOrSerie }) {
-        super(props)
-        this.state = {
-            visible: true,
-        }
-        this.back = this.back.bind(this);
-        this.title = (props.content.title ? props.content.title : props.content.name)
-    }
-    back() {
-        this.setState({
-            visible: false,
-        })
-    }
-    shouldComponentUpdate(nextProps: { content: FilmOrSerie }, nextState: { visible: boolean }) {
-        if (this.state.visible === nextState.visible) {
-            this.setState({
-                visible: true
-            })
-            return false
-        } else {
-            return true
-        }
-    }
+export default class GetInfo extends Component<{ content: FilmOrSerie, back: any }> {
     render() {
-        if (this.state.visible) {
-            return <div id="Darken" className={styles.Darken}>
-                <div className={styles.infoFilm}>
-                    {infoFilmLeft(this.props.content)}
-                    {infoFilmRight(this.props.content, this.back)}
-                </div>
+        return (<div id="Darken" className={styles.Darken}>
+            <div className={styles.infoFilm}>
+                {infoFilmLeft(this.props.content)}
+                {infoFilmRight(this.props.content, this.props.back)}
             </div>
-        } else {
-            return null
-        }
+        </div>)
     }
 }
