@@ -6,6 +6,7 @@ import { Component, Fragment } from 'react';
 import opacity from '../components/filmInfo/opacity.module.css'
 import GetInfo from '../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
+import { Default, Mobile } from '../global/reponsive/function';
 class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: any }> {
     array: Array<FilmOrSerie>
     constructor(props: { arrayresult: FilmOrSerie[] }) {
@@ -13,7 +14,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
         this.array = this.props.arrayresult
         this.state = {
             getInfo: false,
-            info: null
+            info: this.array[0]
         }
         this.InfoFilm = this.InfoFilm.bind(this)
         this.back = this.back.bind(this)

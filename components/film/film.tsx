@@ -5,8 +5,6 @@ import { SerieInt } from './serieInterface'
 import { Fragment } from 'react'
 import { Default, Mobile } from '../../global/reponsive/function'
 import { ClientOnly } from '../../global/reponsive/function'
-import ReactDOM from 'react-dom'
-import GetInfo from '../filmInfo/filmInfo'
 export type FilmOrSerie = FilmInt & SerieInt
 function boutonLandscape(props: FilmOrSerie, func: any) {
     let Serie = props.name ? true : false
@@ -17,8 +15,8 @@ function boutonLandscape(props: FilmOrSerie, func: any) {
 }
 function boutonMobile(props: FilmOrSerie, func: any) {
     let Serie = props.name ? true : false
-    return (<div id="Imagep2" className={styles.boutonMobile} onClick={() => { func(props) }}>
-        <div className={styles.divH2}>
+    return (<div id="Imagep2" className={styles.boutonMobile}>
+        <div className={styles.divH2} onClick={() => { func(props) }}>
             <h4>{Serie ? props.name : props.title}</h4>
         </div>
         <Image src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt="" layout="fill" />

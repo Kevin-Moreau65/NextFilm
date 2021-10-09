@@ -1,10 +1,11 @@
-import { Component, MouseEventHandler } from 'react'
+import { Component, Fragment, MouseEventHandler } from 'react'
 import Image from 'next/image';
 import { FilmOrSerie } from '../film/film'
 import { Genre } from '../film/filmInterface';
 import styles from './filmInfo.module.css'
 import animate from './animate.module.css'
 import { DureeH, NoteColor, Splitand, Titlesize } from './function';
+import { Default, Mobile } from '../../global/reponsive/function';
 function infoFilmLeft(props: FilmOrSerie) {
     let Serie = (props.name ? true : false)
     let element: JSX.Element
@@ -71,13 +72,75 @@ function infoFilmRight(props: FilmOrSerie, back: MouseEventHandler) {
     }
     return element
 }
-export default class GetInfo extends Component<{ content: FilmOrSerie, back: any }> {
-    render() {
-        return (<div id="Darken" className={styles.Darken}>
-            <div className={styles.infoFilm}>
-                {infoFilmLeft(this.props.content)}
-                {infoFilmRight(this.props.content, this.props.back)}
+function infoFilmTop(props: FilmOrSerie) {
+    let Serie = (props.name ? true : false)
+    let element: JSX.Element
+    if (Serie) {
+        element = <div className={styles.top}>
+            <div>
+                <Image alt="" src={"https://image.tmdb.org/t/p/w500/" + props.backdrop_path} layout="fill" />
             </div>
-        </div>)
+            <h2>{props.name}</h2>
+        </div>
+    } else {
+        element = <div className={styles.top}>
+            <div>
+                <Image alt="" src={"https://image.tmdb.org/t/p/w500/" + props.backdrop_path} layout="fill" />
+            </div>
+            <h2>{props.title}</h2>
+        </div>
+    }
+    return element
+}
+export default class GetInfo extends Component<{ content: FilmOrSerie, back: any }, { display: string }> {
+    constructor(props: any) {
+        super(props)
+        this.state = {
+            display: "Résumé"
+        }
+        this.display = this.display.bind(this)
+        this.changeDisplay = this.changeDisplay.bind(this)
+    }
+    changeDisplay(string: string) {
+        this.setState({
+            display: string
+        })
+    }
+    display() {
+        let element: JSX.Element
+        switch (this.state.display) {
+            case "Résumé":
+                element = <div className={styles.resume}><p>{this.props.content.overview}</p></div>
+                return element
+            case "Genres":
+                element = <div className={styles.divGenres}>{this.props.content.genres.map((content: Genre, index: number) => (Splitand(content.name, index)))}</div>
+                return element
+        }
+    }
+    render() {
+        return (<Fragment>
+            <Default>
+                <div id="Darken" className={styles.Darken}>
+                    <div className={styles.infoFilm}>
+                        {infoFilmLeft(this.props.content)}
+                        {infoFilmRight(this.props.content, this.props.back)}
+                    </div>
+                </div>
+            </Default>
+            <Mobile>
+                <div className={styles.divMobile}>
+                    {infoFilmTop(this.props.content)}
+                    <div className={styles.bottom}>
+                        <div className={styles.divButton}>
+                            <h3 onClick={() => { this.changeDisplay("Résumé") }} className={this.state.display === "Résumé" ? styles.selected : undefined}>Résumé</h3>
+                            <h3 onClick={() => { this.changeDisplay("Genres") }} className={this.state.display === "Genres" ? styles.selected : undefined}>Genres</h3>
+                            <h3>Info</h3>
+                        </div>
+                    </div>
+                    {this.display()}
+                    <div className={styles.back}><h3 onClick={this.props.back}>Retour</h3></div>
+                </div>
+            </Mobile>
+        </Fragment>)
     }
 }
