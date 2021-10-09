@@ -299,4 +299,9 @@
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
+    padding: 0 10px;
+}
+
+.divInfo>* {
+    text-align: center;
 }
