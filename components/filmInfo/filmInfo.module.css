@@ -283,6 +283,8 @@
 
 .back {
     display: flex;
+    position: relative;
+    bottom: 0;
     flex-direction: row;
     width: 100%;
     justify-content: center;
