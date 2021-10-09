@@ -26,6 +26,12 @@
     cursor: pointer;
     position: relative;
     aspect-ratio: 7/10;
+    transform: scale(1);
+    transition: all 0.2s;
+}
+
+.boutonMobile:active {
+    transform: scale(0.93);
 }
 
 .boutonMobile .divH2 {
