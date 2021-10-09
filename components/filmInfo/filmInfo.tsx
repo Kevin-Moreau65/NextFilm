@@ -128,18 +128,20 @@ export default class GetInfo extends Component<{ content: FilmOrSerie, back: any
                 </div>
             </Default>
             <Mobile>
-                <div className={styles.divMobile}>
-                    {infoFilmTop(this.props.content)}
-                    <div className={styles.bottom}>
-                        <div className={styles.divButton}>
-                            <h3 onClick={() => { this.changeDisplay("Résumé") }} className={this.state.display === "Résumé" ? styles.selected : undefined}>Résumé</h3>
-                            <h3 onClick={() => { this.changeDisplay("Genres") }} className={this.state.display === "Genres" ? styles.selected : undefined}>Genres</h3>
-                            <h3>Info</h3>
+                <Fragment>
+                    <div className={styles.divMobile}>
+                        {infoFilmTop(this.props.content)}
+                        <div className={styles.bottom}>
+                            <div className={styles.divButton}>
+                                <h3 onClick={() => { this.changeDisplay("Résumé") }} className={this.state.display === "Résumé" ? styles.selected : undefined}>Résumé</h3>
+                                <h3 onClick={() => { this.changeDisplay("Genres") }} className={this.state.display === "Genres" ? styles.selected : undefined}>Genres</h3>
+                                <h3>Info</h3>
+                            </div>
                         </div>
+                        {this.display()}
                     </div>
-                    {this.display()}
-                    <div className={styles.back}><h3 onClick={this.props.back}>Retour</h3></div>
-                </div>
+                    <div className={styles.back}><h3 onClick={this.props.back}>{"<"}</h3></div>
+                </Fragment>
             </Mobile>
         </Fragment>)
     }
