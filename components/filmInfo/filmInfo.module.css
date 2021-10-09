@@ -264,7 +264,7 @@
 .resume {
     padding: 0 10px;
     overflow-y: auto;
-    height: 25%;
+    height: 56%;
 }
 
 .divGenres {
@@ -273,7 +273,7 @@
     width: 100%;
     align-items: center;
     overflow-y: auto;
-    height: 25%;
+    height: 56%;
 }
 
 .divGenres h4 {
