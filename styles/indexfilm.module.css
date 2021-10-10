@@ -102,7 +102,7 @@
     height: 10vw;
     border-radius: 50%;
     background-color: rgb(0, 0, 0);
-    border: solid rgb(255, 255, 255) 0.5px;
+    border: solid rgb(255, 255, 255) 2px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
