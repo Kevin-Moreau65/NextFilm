@@ -67,7 +67,7 @@ function GenreColor(Genre: string) {
         case "Guerre":
             return { color: "rgb(105, 192, 11)" }
         case "Musique":
-            return { backgroundColor: "white", borderRadius: "2px", color: "rgb(0, 0, 0) !important" }
+            return { backgroundColor: "white", borderRadius: "2px", color: "rgb(0, 0, 0)", padding: "2px" }
         case "Mystère":
             return { color: "rgb(22, 181, 115)" }
     }

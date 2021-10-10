@@ -92,8 +92,8 @@ function infoFilmTop(props: FilmOrSerie) {
     }
     return element
 }
-export default class GetInfo extends Component<{ content: FilmOrSerie, back: any }, { display: string }> {
-    constructor(props: any) {
+export default class GetInfo extends Component<{ content: FilmOrSerie, back: () => void }, { display: string }> {
+    constructor(props: { content: FilmOrSerie, back: () => void }) {
         super(props)
         this.state = {
             display: "Résumé"

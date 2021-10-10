@@ -1,13 +1,13 @@
-import dataJSON from '../json/filmVu.json'
+import dataJSON from '../../json/filmPasVu.json'
 import Head from 'next/head';
-import Film, { FilmOrSerie } from "../components/film/film";
-import styles from '../styles/indexfilm.module.css'
+import Film, { FilmOrSerie } from "../../components/film/film";
+import styles from '../../styles/indexfilm.module.css'
 import { Component, Fragment } from 'react';
-import opacity from '../components/filmInfo/opacity.module.css'
-import GetInfo from '../components/filmInfo/filmInfo';
+import opacity from '../../components/filmInfo/opacity.module.css'
+import GetInfo from '../../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
-import { Default, Mobile } from '../global/reponsive/function';
-class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: any }> {
+import Link from 'next/link'
+class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie }> {
     array: Array<FilmOrSerie>
     constructor(props: { arrayresult: FilmOrSerie[] }) {
         super(props)
@@ -36,7 +36,17 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                 <Head>
                     <title>Film</title>
                 </Head>
-                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des film vu avec la salopette</h1>
+                <div className={styles.MobHeader}>
+                    <div className={styles.MobBTN} style={{ left: "15px" }}>
+                        <h3>+</h3>
+                    </div>
+                    <Link href="/indexfilm">
+                        <div className={styles.MobBTN} style={{ right: "15px" }}>
+                            <h4>Pvu</h4>
+                        </div>
+                    </Link>
+                </div>
+                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films pas vu avec la salopette</h1>
                 <div className={styles.main} key={"MAIN"}>
                     {this.array.map((content: FilmOrSerie) => (
                         <Fragment key={content.id}>
