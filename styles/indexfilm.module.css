@@ -113,3 +113,7 @@
 .MobBTN:active {
     transform: scale(0.7);
 }
+
+.seen {
+    text-decoration: underline;
+}

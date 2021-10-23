@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 import dataJSON from '../../json/filmPasVu.json'
 import Head from 'next/head';
 import Film, { FilmOrSerie } from "../../components/film/film";
@@ -6,6 +7,7 @@ import { Component, Fragment } from 'react';
 import opacity from '../../components/filmInfo/opacity.module.css'
 import GetInfo from '../../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
+import { Default, Mobile } from '../../global/reponsive/function'
 import Link from 'next/link'
 class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie }> {
     array: Array<FilmOrSerie>
@@ -36,17 +38,19 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                 <Head>
                     <title>Film</title>
                 </Head>
-                <div className={styles.MobHeader}>
-                    <div className={styles.MobBTN} style={{ left: "15px" }}>
-                        <h3>+</h3>
-                    </div>
-                    <Link href="/indexfilm">
-                        <div className={styles.MobBTN} style={{ right: "15px" }}>
-                            <h4>Pvu</h4>
+                <Mobile>
+                    <div className={styles.MobHeader}>
+                        <div className={styles.MobBTN} style={{ left: "15px" }}>
+                            <h3>+</h3>
                         </div>
-                    </Link>
-                </div>
-                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films pas vu avec la salopette</h1>
+                        <Link href="/indexfilm">
+                            <div className={styles.MobBTN} style={{ right: "15px" }}>
+                                <h4>Pvu</h4>
+                            </div>
+                        </Link>
+                    </div>
+                </Mobile>
+                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films <Link href="/indexfilm"><a className={styles.seen}>pas vu</a></Link> avec la salopette</h1>
                 <div className={styles.main} key={"MAIN"}>
                     {this.array.map((content: FilmOrSerie) => (
                         <Fragment key={content.id}>

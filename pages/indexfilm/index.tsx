@@ -7,6 +7,7 @@ import { Component, Fragment } from 'react';
 import opacity from '../../components/filmInfo/opacity.module.css'
 import GetInfo from '../../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
+import { Default, Mobile } from '../../global/reponsive/function'
 import Link from 'next/link'
 class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie }> {
     array: Array<FilmOrSerie>
@@ -37,17 +38,19 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                 <Head>
                     <title>Film</title>
                 </Head>
-                <div className={styles.MobHeader}>
-                    <div className={styles.MobBTN} style={{ left: "15px" }}>
-                        <h3>+</h3>
-                    </div>
-                    <Link href="/indexfilm/pasVu">
-                        <div className={styles.MobBTN} style={{ right: "15px" }}>
-                            <h4>Vu</h4>
+                <Mobile>
+                    <div className={styles.MobHeader}>
+                        <div className={styles.MobBTN} style={{ left: "15px" }}>
+                            <h3>+</h3>
                         </div>
-                    </Link>
-                </div>
-                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films vu avec la salopette</h1>
+                        <Link href="/indexfilm/pasVu">
+                            <div className={styles.MobBTN} style={{ right: "15px" }}>
+                                <h4>Vu</h4>
+                            </div>
+                        </Link>
+                    </div>
+                </Mobile>
+                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films <Link href="/indexfilm/pasVu"><a className={styles.seen}>vu</a></Link> avec la salopette</h1>
                 <div className={styles.main} key={"MAIN"}>
                     {this.array.map((content: FilmOrSerie) => (
                         <Fragment key={content.id}>
