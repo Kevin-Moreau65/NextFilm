@@ -7,6 +7,7 @@ export async function postFilm(name: string, url: string, pwd: string, vu: boole
         body: JSON.stringify(object)
     });
     const responseText = await response.text();
+    console.log(responseText)
     if (JSON.parse(responseText).res === "wrong") {
         alert("Mot de passe incorrect sale merde")
     } else if (JSON.parse(responseText).res === "OK") {
