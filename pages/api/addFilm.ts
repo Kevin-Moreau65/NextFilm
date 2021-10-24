@@ -22,6 +22,6 @@ export default function handler(
     fs.writeFileSync(path.join(JSONpath + '/filmVu.json'), input);
     res.status(201).json({ res: "OK" })
   } else {
-    res.status(403).json({ res: "wrong" })
+    res.status(403).json({ res: __dirname })
   }
 }
