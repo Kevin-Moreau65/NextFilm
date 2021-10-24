@@ -4,7 +4,43 @@
     background-color: var(--Background);
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.Darken {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.671);
+    backdrop-filter: blur(5px);
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    z-index: 10;
+}
+
+.popup h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.divBTN {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+
+.divBTN h3 {
+    cursor: pointer;
+}
+
+.divBTN h3:hover {
+    text-decoration: underline;
 }

@@ -9,17 +9,21 @@ import GetInfo from '../../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
 import { Default, Mobile } from '../../global/reponsive/function'
 import Link from 'next/link'
-class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie }> {
+import AddFilm from '../../components/addFilm/addFilm';
+class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie, add: boolean }> {
     array: Array<FilmOrSerie>
     constructor(props: { arrayresult: FilmOrSerie[] }) {
         super(props)
         this.array = this.props.arrayresult
         this.state = {
             getInfo: false,
-            info: this.array[0]
+            info: this.array[0],
+            add: false
         }
         this.InfoFilm = this.InfoFilm.bind(this)
-        this.back = this.back.bind(this)
+        this.backInfo = this.backInfo.bind(this)
+        this.addFilm = this.addFilm.bind(this)
+        this.backAdd = this.backAdd.bind(this)
     }
     InfoFilm(props: FilmOrSerie) {
         this.setState({
@@ -27,9 +31,19 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
             info: props
         })
     }
-    back() {
+    backInfo() {
         this.setState({
             getInfo: false
+        })
+    }
+    backAdd() {
+        this.setState({
+            add: false
+        })
+    }
+    addFilm() {
+        this.setState({
+            add: true
         })
     }
     render() {
@@ -51,6 +65,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                     </div>
                 </Mobile>
                 <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films <Link href="/indexfilm/pasVu"><a className={styles.seen}>vu</a></Link> avec la salopette</h1>
+                <h2 onClick={this.addFilm}>Ajouter</h2>
                 <div className={styles.main} key={"MAIN"}>
                     {this.array.map((content: FilmOrSerie) => (
                         <Fragment key={content.id}>
@@ -59,7 +74,10 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                     ))}
                 </div>
                 <CSSTransition in={this.state.getInfo} classNames={opacity} timeout={200} unmountOnExit>
-                    <GetInfo content={this.state.info} back={this.back}></GetInfo>
+                    <GetInfo content={this.state.info} back={this.backInfo}></GetInfo>
+                </CSSTransition>
+                <CSSTransition in={this.state.add} classNames={opacity} timeout={200} unmountOnExit>
+                    <AddFilm back={this.backAdd}></AddFilm>
                 </CSSTransition>
             </div>
         )
