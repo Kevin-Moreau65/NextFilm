@@ -1,0 +1,7 @@
+{
+    "functions": {
+        "pages/api/addFilm.ts": {
+            "includeFiles": "json/**"
+        }
+    }
+}
