@@ -20,9 +20,14 @@ export default function handler(
     let data = JSON.parse(rawdata);
     data[body.name] = body.url
     let input = JSON.stringify(data)
-    // fs.writeFileSync(path.join(JSONpath + '/filmVu.json'), input);
-    res.status(201).json({ res: JSON.parse(input) })
+    fs.writeFile(path.join(JSONpath + '/filmVu.json'), input, (err) => {
+      if (err) {
+        res.status(500).json({ res: err })
+      } else {
+        res.status(201).json({ res: JSON.parse(input) })
+      }
+    });
   } else {
-    res.status(403).json({ res: __dirname })
+    res.status(403).json({ res: "wrong" })
   }
 }
