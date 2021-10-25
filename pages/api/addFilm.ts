@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import lol from '../../json/filmVu.json'
 import fs from 'fs'
 import path from 'path'
 type Data = {
@@ -19,8 +20,8 @@ export default function handler(
     let data = JSON.parse(rawdata);
     data[body.name] = body.url
     let input = JSON.stringify(data)
-    fs.writeFileSync(path.join(JSONpath + '/filmVu.json'), input);
-    res.status(201).json({ res: "OK" })
+    // fs.writeFileSync(path.join(JSONpath + '/filmVu.json'), input);
+    res.status(201).json({ res: JSON.parse(input) })
   } else {
     res.status(403).json({ res: __dirname })
   }
