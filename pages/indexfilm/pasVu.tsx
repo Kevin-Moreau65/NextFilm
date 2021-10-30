@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/link-passhref */
-import dataJSON from '../../json/filmPasVu.json'
 import Head from 'next/head';
 import Film, { FilmOrSerie } from "../../components/film/film";
 import styles from '../../styles/indexfilm.module.css'
@@ -7,8 +6,10 @@ import { Component, Fragment } from 'react';
 import opacity from '../../components/filmInfo/opacity.module.css'
 import GetInfo from '../../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
-import { Default, Mobile } from '../../global/reponsive/function'
+import { Mobile } from '../../global/reponsive/function'
 import Link from 'next/link'
+import { MFilmPasVu } from '../../global/db/schema';
+import dbConnect from '../../global/db/database';
 class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie }> {
     array: Array<FilmOrSerie>
     constructor(props: { arrayresult: FilmOrSerie[] }) {
@@ -67,7 +68,9 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
 }
 export const getStaticProps = async () => {
     let arrayresult: Array<FilmOrSerie> = []
-    for await (let val of Object.values(dataJSON)) {
+    await dbConnect()
+    let films = await MFilmPasVu.find({})
+    for await (let val of Object.values(films[0].film)) {
         const res = await fetch("https://api.themoviedb.org/3" +
             val +
             "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr-FR")
@@ -76,7 +79,7 @@ export const getStaticProps = async () => {
     }
     return {
         props: {
-            arrayresult,
+            arrayresult
         },
         revalidate: 30
     }
