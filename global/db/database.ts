@@ -21,17 +21,10 @@ if (!cached) {
 }
 
 async function dbConnect() {
-    if (cached.conn) {
-        return cached.conn
-    }
-
-    if (!cached.promise) {
-        cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => {
-            return mongoose
-        })
-    }
-    cached.conn = await cached.promise
-    return cached.conn
+    let db = mongoose.connect(MONGODB_URI).then((mongoose) => {
+        return mongoose
+    })
+    return db
 }
 
 export default dbConnect
