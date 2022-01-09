@@ -1,7 +1,7 @@
 import Popup from "../popup/popup";
 export async function postFilm(name: string, url: string, pwd: string, vu: boolean) {
     if (!url || !name) {
-        return Popup("Non mais tu fous quoi")
+        return alert("Non mais tu fous quoi")
     }
     let target = url.split('/')
     let mode = "/" + target[3] + "/" + target[4].split('-')[0]
