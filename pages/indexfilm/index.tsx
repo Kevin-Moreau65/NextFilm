@@ -7,7 +7,7 @@ import { Component, Fragment } from 'react';
 import opacity from '../../components/filmInfo/opacity.module.css'
 import GetInfo from '../../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
-import { Mobile, Default } from '../../global/reponsive/function'
+import { Mobile, Default, ClientOnly } from '../../global/reponsive/function'
 import Link from 'next/link'
 import AddFilm from '../../components/addFilm/addFilm';
 import dbConnect from '../../global/db/database';
@@ -54,7 +54,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                     <title>Film</title>
                 </Head>
                 <Mobile>
-                    <section>
+                    <ClientOnly>
                         <div className={styles.MobHeader}>
                             <div className={styles.MobBTN} style={{ left: "15px" }}>
                                 <h3 onClick={this.addFilm}>+</h3>
@@ -65,7 +65,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                                 </div>
                             </Link>
                         </div>
-                    </section>
+                    </ClientOnly>
                 </Mobile>
                 <h1 style={{ textAlign: "center", padding: "0px 10px" }} key={"H1"}>Recap des films <Link href="/indexfilm/pasVu"><a className={styles.seen}>vu</a></Link> avec la salopette</h1>
                 <Default><h2 onClick={this.addFilm}>Ajouter</h2></Default>
