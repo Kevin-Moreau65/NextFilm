@@ -44,3 +44,18 @@
 .divBTN h3:hover {
     text-decoration: underline;
 }
+
+.addMobile {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 40px;
+    align-items: center;
+    background-color: black;
+    z-index: 90;
+}

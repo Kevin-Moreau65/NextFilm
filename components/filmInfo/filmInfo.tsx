@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { FilmOrSerie } from '../film/film'
 import { Genre } from '../film/filmInterface';
 import styles from './filmInfo.module.css'
-import animate from './animate.module.css'
 import { DureeH, NoteColor, Splitand, Titlesize } from './function';
 import { Default, Mobile } from '../../global/reponsive/function';
 function infoFilmLeft(props: FilmOrSerie) {
@@ -57,6 +56,7 @@ function infoFilmRight(props: FilmOrSerie, back: MouseEventHandler) {
             </p>
             <h3 className={styles.back} onClick={back}>Retour</h3>
             <h4 className={styles.more}>{"<<"} En savoir plus</h4>
+            <h4 className={styles.back}>Supprimer</h4>
         </div>)
     } else {
         element = (<div className={styles.right}>
@@ -68,6 +68,7 @@ function infoFilmRight(props: FilmOrSerie, back: MouseEventHandler) {
             </p>
             <h3 className={styles.back} onClick={back}>Retour</h3>
             <h4 className={styles.more}>{"<<"} En savoir plus</h4>
+            <h4 className={styles.back}>Supprimer</h4>
         </div>)
     }
     return element

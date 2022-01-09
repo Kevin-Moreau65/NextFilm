@@ -6,7 +6,7 @@ import { Component, Fragment } from 'react';
 import opacity from '../../components/filmInfo/opacity.module.css'
 import GetInfo from '../../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
-import { Mobile } from '../../global/reponsive/function'
+import { Mobile, Default } from '../../global/reponsive/function'
 import Link from 'next/link'
 import { MFilmPasVu } from '../../global/db/schema';
 import dbConnect from '../../global/db/database';

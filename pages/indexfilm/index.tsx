@@ -7,7 +7,7 @@ import { Component, Fragment } from 'react';
 import opacity from '../../components/filmInfo/opacity.module.css'
 import GetInfo from '../../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
-import { Mobile } from '../../global/reponsive/function'
+import { Mobile, Default } from '../../global/reponsive/function'
 import Link from 'next/link'
 import AddFilm from '../../components/addFilm/addFilm';
 import dbConnect from '../../global/db/database';
@@ -56,7 +56,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                 <Mobile>
                     <div className={styles.MobHeader}>
                         <div className={styles.MobBTN} style={{ left: "15px" }}>
-                            <h3>+</h3>
+                            <h3 onClick={this.addFilm}>+</h3>
                         </div>
                         <Link href="/indexfilm/pasVu">
                             <div className={styles.MobBTN} style={{ right: "15px" }}>
@@ -66,7 +66,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                     </div>
                 </Mobile>
                 <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films <Link href="/indexfilm/pasVu"><a className={styles.seen}>vu</a></Link> avec la salopette</h1>
-                <h2 onClick={this.addFilm}>Ajouter</h2>
+                <Default><h2 onClick={this.addFilm}>Ajouter</h2></Default>
                 <div className={styles.main} key={"MAIN"}>
                     {this.array.map((content: FilmOrSerie) => (
                         <Fragment key={content.id}>
