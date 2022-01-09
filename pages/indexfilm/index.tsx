@@ -54,18 +54,20 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                     <title>Film</title>
                 </Head>
                 <Mobile>
-                    <div className={styles.MobHeader}>
-                        <div className={styles.MobBTN} style={{ left: "15px" }}>
-                            <h3 onClick={this.addFilm}>+</h3>
-                        </div>
-                        <Link href="/indexfilm/pasVu">
-                            <div className={styles.MobBTN} style={{ right: "15px" }}>
-                                <h4>Vu</h4>
+                    <section>
+                        <div className={styles.MobHeader}>
+                            <div className={styles.MobBTN} style={{ left: "15px" }}>
+                                <h3 onClick={this.addFilm}>+</h3>
                             </div>
-                        </Link>
-                    </div>
+                            <Link href="/indexfilm/pasVu">
+                                <div className={styles.MobBTN} style={{ right: "15px" }}>
+                                    <h4>Vu</h4>
+                                </div>
+                            </Link>
+                        </div>
+                    </section>
                 </Mobile>
-                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films <Link href="/indexfilm/pasVu"><a className={styles.seen}>vu</a></Link> avec la salopette</h1>
+                <h1 style={{ textAlign: "center", padding: "0px 10px" }} key={"H1"}>Recap des films <Link href="/indexfilm/pasVu"><a className={styles.seen}>vu</a></Link> avec la salopette</h1>
                 <Default><h2 onClick={this.addFilm}>Ajouter</h2></Default>
                 <div className={styles.main} key={"MAIN"}>
                     {this.array.map((content: FilmOrSerie) => (
@@ -88,7 +90,6 @@ export const getStaticProps = async () => {
     let arrayresult: Array<FilmOrSerie> = []
     await dbConnect()
     let films = await MFilmVu.find({})
-    console.log(films[0]._id.toString())
     for await (let val of Object.values(films[0].film)) {
         const res = await fetch("https://api.themoviedb.org/3" +
             val +
