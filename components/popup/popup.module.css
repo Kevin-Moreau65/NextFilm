@@ -1,0 +1,6 @@
+.pop {
+    position: absolute;
+    top: 10%;
+    display: flex;
+    background-color: darkgreen;
+}

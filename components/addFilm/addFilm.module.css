@@ -59,3 +59,13 @@
     background-color: black;
     z-index: 90;
 }
+
+.addMobile input {
+    background-color: black;
+    border: solid white 0.1px;
+    border-radius: 5px;
+    padding: 3px;
+}
+.addMobile label {
+    font-size: large;
+}

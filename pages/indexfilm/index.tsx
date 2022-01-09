@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/link-passhref */
-import { MFilmVu } from '../../global/db/schema';
+import { MFilmPasVu, MFilmVu } from '../../global/db/schema';
 import Head from 'next/head';
 import Film, { FilmOrSerie } from "../../components/film/film";
 import styles from '../../styles/indexfilm.module.css'

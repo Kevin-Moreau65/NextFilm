@@ -5,7 +5,7 @@ import { MFilmVu, MFilmPasVu } from '../../global/db/schema'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     let body = JSON.parse(req.body)
     if (body.vu === undefined) {
-        return res.status(401).json({ success: body })
+        return res.status(401).json({ success: "undefined" })
     } else if (body.pwd !== "Angele1972") {
         return res.status(400).json({ res: "wrong" })
     }
@@ -14,10 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const films = body.vu ? MFilmVu : MFilmPasVu
         let data = await films.find({})
         delete data[0].film[body.name]
-        const film = await films.findByIdAndUpdate(data[0]._id.toString(), data[0], {
-            new: true,
-            runValidators: true,
-        })
+        const film = await films.findByIdAndDelete(data[0]._id.toString())
         if (!film) {
             return res.status(400).json({ success: false })
         }
