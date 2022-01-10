@@ -49,6 +49,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    box-shadow: -40px -10px 10px black, 40px -10px 10px black;
     transition: 0.26s;
 }
 
