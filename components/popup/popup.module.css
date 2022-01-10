@@ -1,6 +1,17 @@
 .pop {
-    position: absolute;
+    position: fixed;
     top: 10%;
+    width: 100vw;
     display: flex;
-    background-color: darkgreen;
+    z-index: 99;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+    font-family: 'Raleway', sans-serif;
+}
+.pop h3 {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(187, 37, 37);
 }

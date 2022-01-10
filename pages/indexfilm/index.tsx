@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/link-passhref */
-import { MFilmPasVu, MFilmVu } from '../../global/db/schema';
+import { MFilmVu } from '../../global/db/schema';
 import Head from 'next/head';
 import Film, { FilmOrSerie } from "../../components/film/film";
 import styles from '../../styles/indexfilm.module.css'
@@ -11,7 +11,8 @@ import { Mobile, Default, ClientOnly } from '../../global/reponsive/function'
 import Link from 'next/link'
 import AddFilm from '../../components/addFilm/addFilm';
 import dbConnect from '../../global/db/database';
-class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie, add: boolean }> {
+import Popup from '../../components/popup/popup';
+class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie, add: boolean, popup: { show: boolean, info?: string, error: boolean } }> {
     array: Array<FilmOrSerie>
     constructor(props: { arrayresult: FilmOrSerie[] }) {
         super(props)
@@ -19,18 +20,42 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
         this.state = {
             getInfo: false,
             info: this.array[0],
-            add: false
+            add: false,
+            popup: {
+                show: false,
+                info: undefined,
+                error: false
+            }
         }
         this.InfoFilm = this.InfoFilm.bind(this)
         this.backInfo = this.backInfo.bind(this)
         this.addFilm = this.addFilm.bind(this)
         this.backAdd = this.backAdd.bind(this)
+        this.popup = this.popup.bind(this)
     }
     InfoFilm(props: FilmOrSerie) {
         this.setState({
             getInfo: true,
             info: props
         })
+    }
+    popup(msg: string, error: boolean) {
+        this.setState({
+            popup: {
+                show: true,
+                info: msg,
+                error: error
+            }
+        })
+        setTimeout(() => {
+            this.setState({
+                popup: {
+                    show: false,
+                    error: error,
+                    info: msg
+                }
+            })
+        }, 5000)
     }
     backInfo() {
         this.setState({
@@ -53,6 +78,9 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                 <Head>
                     <title>Film</title>
                 </Head>
+                <CSSTransition in={this.state.popup.show} classNames={opacity} timeout={400} unmountOnExit>
+                    <Popup phrase={this.state.popup.info} error={this.state.popup.error}></Popup>
+                </CSSTransition>
                 <Mobile>
                     <ClientOnly>
                         <div className={styles.MobHeader}>
@@ -80,7 +108,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                     <GetInfo content={this.state.info} back={this.backInfo}></GetInfo>
                 </CSSTransition>
                 <CSSTransition in={this.state.add} classNames={opacity} timeout={200} unmountOnExit>
-                    <AddFilm back={this.backAdd}></AddFilm>
+                    <AddFilm back={this.backAdd} popup={this.popup}></AddFilm>
                 </CSSTransition>
             </div>
         )

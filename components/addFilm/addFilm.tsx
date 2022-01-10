@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Default, Mobile } from "../../global/reponsive/function";
 import styles from './addFilm.module.css'
 import { postFilm } from './function'
-export default class AddFilm extends Component<{ back: () => void }, { display: boolean, vu: boolean, title: string, url: string, pwd: string }> {
+export default class AddFilm extends Component<{ back: () => void, popup: (msg: string, error: boolean) => void }, { display: boolean, vu: boolean, title: string, url: string, pwd: string, }> {
     constructor(props: any) {
         super(props)
         this.state = {
@@ -42,7 +42,7 @@ export default class AddFilm extends Component<{ back: () => void }, { display: 
         }
     }
     addFilm() {
-        postFilm(this.state.title, this.state.url, this.state.pwd, this.state.vu)
+        postFilm(this.state.title, this.state.url, this.state.pwd, this.state.vu, this.props.popup)
     }
     render() {
         return <>

@@ -74,7 +74,7 @@
     opacity: 0.9;
 }
 
-.left:hover>div>img {
+.left:hover div img {
     filter: brightness(0.2);
 }
 
