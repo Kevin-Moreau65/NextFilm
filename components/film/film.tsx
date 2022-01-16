@@ -6,14 +6,14 @@ import { Fragment } from 'react'
 import { Default, Mobile } from '../../global/reponsive/function'
 import { ClientOnly } from '../../global/reponsive/function'
 export type FilmOrSerie = FilmInt & SerieInt
-function boutonLandscape(props: FilmOrSerie, func: any) {
+function boutonLandscape(props: FilmOrSerie, func: (props: FilmOrSerie) => void) {
     let Serie = props.name ? true : false
     return (<div id="Imagep2" className={styles.bouton} onClick={() => { func(props) }}>
         <Image src={"https://image.tmdb.org/t/p/w500" + props.backdrop_path} alt="" layout="fill" />
         <h2 id="BackTitlep2">{Serie ? props.name : props.title}</h2>
     </div>)
 }
-function boutonMobile(props: FilmOrSerie, func: any) {
+function boutonMobile(props: FilmOrSerie, func: (props: FilmOrSerie) => void) {
     let Serie = props.name ? true : false
     return (<div id="Imagep2" className={styles.boutonMobile}>
         <div className={styles.divH2} onClick={() => { func(props) }}>

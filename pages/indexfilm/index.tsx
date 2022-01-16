@@ -12,10 +12,21 @@ import Link from 'next/link'
 import AddFilm from '../../components/addFilm/addFilm';
 import dbConnect from '../../global/db/database';
 import Popup from '../../components/popup/popup';
-class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie, add: boolean, popup: { show: boolean, info?: string, error: boolean } }> {
+class Indexfilm extends Component<{ arrayresult: FilmOrSerie[], resultTime: number }, { getInfo: boolean, info: FilmOrSerie, add: boolean, popup: { show: boolean, info?: string, error: boolean } }> {
     array: Array<FilmOrSerie>
-    constructor(props: { arrayresult: FilmOrSerie[] }) {
+    time: () => string
+    constructor(props: { arrayresult: FilmOrSerie[], resultTime: number }) {
         super(props)
+        this.time = () => {
+            let j, h, m
+            j = 0
+            m = 0
+            h = Math.floor(this.props.resultTime / 60)
+            j = Math.floor(h / 24)
+            m = this.props.resultTime - h * 60
+            h = h - j * 24
+            return j +" j "+ h + " h " + m + " min"
+        }
         this.array = this.props.arrayresult
         this.state = {
             getInfo: false,
@@ -96,6 +107,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                     </ClientOnly>
                 </Mobile>
                 <h1 style={{ textAlign: "center", padding: "0px 10px" }} key={"H1"}>Recap des films <Link href="/indexfilm/pasVu"><a className={styles.seen}>vu</a></Link> avec la salopette</h1>
+                <h1 style={{ textAlign: "center", padding: "0px 10px" }}>{this.time()} de contenu regardé !</h1>
                 <Default><h2 onClick={this.addFilm}>Ajouter</h2></Default>
                 <div className={styles.main} key={"MAIN"}>
                     {this.array.map((content: FilmOrSerie) => (
@@ -118,16 +130,20 @@ export const getStaticProps = async () => {
     let arrayresult: Array<FilmOrSerie> = []
     await dbConnect()
     let films = await MFilmVu.find({})
+    let resultTime = 0
     for await (let val of Object.values(films[0].film)) {
         const res = await fetch("https://api.themoviedb.org/3" +
             val +
             "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr-FR")
         const result: FilmOrSerie = await res.json()
         arrayresult.push(result)
+        const time = result.runtime ? result.runtime : result.episode_run_time[0] * result.number_of_episodes
+        resultTime += time
     }
     return {
         props: {
-            arrayresult
+            arrayresult,
+            resultTime
         },
         revalidate: 30
     }

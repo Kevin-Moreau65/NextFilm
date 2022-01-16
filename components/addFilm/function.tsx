@@ -16,7 +16,7 @@ export async function postFilm(name: string, url: string, pwd: string, vu: boole
         } else if (JSON.parse(responseText).success !== true) {
             return popup("Une erreur s'est produite", true)
         } else {
-            popup("Ajout du film effectué, ton navigateur va s'actualiser dans", false)
+            popup("Ajout du film effectué, ton navigateur va s'actualiser", false)
             setTimeout(() =>
                 location.reload(), 9000)
         }
