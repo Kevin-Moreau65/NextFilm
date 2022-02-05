@@ -135,25 +135,51 @@ export const getStaticProps = async () => {
     let longSerie = 0
     let courtFilm = null
     let courtSerie = null
+    let numFilm = 0;
+    let numSerie = 0;
+    let nomFilmCourt, nomFilmLong, nomSerieCourt, nomSerieLong;
     for await (let val of Object.values(films[0].film)) {
         const res = await fetch("https://api.themoviedb.org/3" +
             val +
             "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr-FR")
         const result: FilmOrSerie = await res.json()
         arrayresult.push(result)
+        if (result.runtime) {
+            numFilm++
+        } else {
+            numSerie++
+        }
         const time = result.runtime ? result.runtime : result.episode_run_time[0] * result.number_of_episodes
         if (result.runtime) {
-            if (courtFilm == null) courtFilm = time
-            if (time < courtFilm) courtFilm = time
-            if (time > longFilm) longFilm = time
+            if (courtFilm == null) {
+                courtFilm = time
+                nomFilmCourt = result.title
+            }
+            if (time < courtFilm) {
+                courtFilm = time
+                nomFilmCourt = result.title
+            }
+            if (time > longFilm) {
+                longFilm = time
+                nomFilmLong = result.title
+            }
         } else {
-            if (courtSerie == null) courtSerie = time
-            if (time < courtSerie) courtSerie = time
-            if (time > longSerie) longSerie = time
+            if (courtSerie == null) {
+                courtSerie = time
+                nomSerieCourt = result.name
+            }
+            if (time < courtSerie) {
+                courtSerie = time
+                nomSerieCourt = result.name
+            }
+            if (time > longSerie) {
+                longSerie = time
+                nomSerieLong = result.name
+            }
         }
         resultTime += time
     }
-    console.log(courtFilm, courtSerie, longFilm, longSerie)
+    console.log()
     return {
         props: {
             arrayresult,

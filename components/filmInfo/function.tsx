@@ -41,7 +41,7 @@ export function NoteColor(Note: number) {
 function GenreColor(Genre: string) {
     switch (Genre) {
         case "Comédie":
-            return { color: "rgb( 255, 142, 0)" };
+            return { color: "rgb( 255, 142, 0)" }
         case "Animation":
             return { color: "rgb(5, 176, 214)" }
         case "Romance":

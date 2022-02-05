@@ -10,8 +10,8 @@ Graphique a faire {
 }
 total = 8 2 text
 info a avoir {
-    Série/film +/-long
-    nombre de film/série
+    Série/film +/-long X/
+    nombre de film/série X/
     total genre
     années de sortie
 }
