@@ -3,7 +3,7 @@ import { Default, Mobile } from "../../global/reponsive/function";
 import styles from './addFilm.module.css'
 import { postFilm } from './function'
 export default class AddFilm extends Component<{ back: () => void, popup: (msg: string, error: boolean) => void }, { display: boolean, vu: boolean, title: string, url: string, pwd: string, }> {
-    constructor(props: any) {
+    constructor(props: { back: () => void, popup: (msg: string, error: boolean) => void }) {
         super(props)
         this.state = {
             display: false,

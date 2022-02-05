@@ -25,7 +25,7 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[], resultTime: numb
             j = Math.floor(h / 24)
             m = this.props.resultTime - h * 60
             h = h - j * 24
-            return j +" j "+ h + " h " + m + " min"
+            return j + " j " + h + " h " + m + " min"
         }
         this.array = this.props.arrayresult
         this.state = {
@@ -131,6 +131,10 @@ export const getStaticProps = async () => {
     await dbConnect()
     let films = await MFilmVu.find({})
     let resultTime = 0
+    let longFilm = 0
+    let longSerie = 0
+    let courtFilm = null
+    let courtSerie = null
     for await (let val of Object.values(films[0].film)) {
         const res = await fetch("https://api.themoviedb.org/3" +
             val +
@@ -138,8 +142,18 @@ export const getStaticProps = async () => {
         const result: FilmOrSerie = await res.json()
         arrayresult.push(result)
         const time = result.runtime ? result.runtime : result.episode_run_time[0] * result.number_of_episodes
+        if (result.runtime) {
+            if (courtFilm == null) courtFilm = time
+            if (time < courtFilm) courtFilm = time
+            if (time > longFilm) longFilm = time
+        } else {
+            if (courtSerie == null) courtSerie = time
+            if (time < courtSerie) courtSerie = time
+            if (time > longSerie) longSerie = time
+        }
         resultTime += time
     }
+    console.log(courtFilm, courtSerie, longFilm, longSerie)
     return {
         props: {
             arrayresult,
