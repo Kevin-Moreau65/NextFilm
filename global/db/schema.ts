@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const FilmVu = new mongoose.Schema({
     film: {
         type: Object,
-        required: true
+
     }
 },
     { collection: 'vu' })
@@ -32,6 +32,7 @@ export interface Statistiques {
         Annee: {
             [key: string]: number
         },
+        totalTime: number
     },
     serie: {
         total: number,
@@ -57,35 +58,32 @@ export interface Statistiques {
         Annee: {
             [key: string]: number
         },
+        totalTime: number
     }
 }
 const Stats = new mongoose.Schema<Statistiques>({
     film: {
-        required: true,
         total: {
             type: Number,
-            required: true
+
         },
         plusLong: {
-            required: true,
             duree: {
                 type: Number,
-                required: true
+
             },
             titre: {
                 type: String,
-                required: true
+
             }
         },
         plusCourt: {
-            required: true,
             duree: {
                 type: Number,
-                required: true
+
             },
             titre: {
-                type: String,
-                required: true
+                type: String
             }
         },
         genre: {
@@ -108,54 +106,49 @@ const Stats = new mongoose.Schema<Statistiques>({
         mieuxNote: {
             note: {
                 type: Number,
-                required: true
+
             },
             titre: {
                 type: String,
-                required: true
+
             }
         },
         moinsNote: {
             note: {
                 type: Number,
-                required: true
+
             },
             titre: {
                 type: String,
-                required: true
+
             }
         },
         Annee: {
             type: Object,
-            required: true
-        }
+
+        },
+        totalTime: {
+            type: Number,
+        },
     },
     serie: {
-        required: true,
         total: {
-            type: Number,
-            required: true
+            type: Number
         },
         plusLong: {
-            required: true,
             duree: {
                 type: Number,
-                required: true
             },
             titre: {
-                type: String,
-                required: true
+                type: String
             }
         },
         plusCourt: {
-            required: true,
             duree: {
                 type: Number,
-                required: true
             },
             titre: {
                 type: String,
-                required: true
             }
         },
         genre: {
@@ -178,26 +171,24 @@ const Stats = new mongoose.Schema<Statistiques>({
         mieuxNote: {
             note: {
                 type: Number,
-                required: true
             },
             titre: {
                 type: String,
-                required: true
             }
         },
         moinsNote: {
             note: {
                 type: Number,
-                required: true
             },
             titre: {
                 type: String,
-                required: true
             }
         },
         Annee: {
             type: Object,
-            required: true
+        },
+        totalTime: {
+            type: Number,
         }
     }
 },
@@ -205,7 +196,7 @@ const Stats = new mongoose.Schema<Statistiques>({
 const FilmPasVu = new mongoose.Schema({
     film: {
         type: Object,
-        required: true
+
     }
 },
     { collection: 'pasvu' })
