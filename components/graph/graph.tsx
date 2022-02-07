@@ -1,11 +1,16 @@
 import { Component } from "react";
 import styles from './graph.module.css'
 
-export default class Graph extends Component<{ title: string }, { selected: string }> {
+export default class Graph extends Component<{ title: string, solo?: boolean }, { selected: string }> {
+    color: { film: string; serie: string; };
     constructor(props: { title: string }) {
         super(props)
         this.state = {
             selected: "tout"
+        }
+        this.color = {
+            film: "#485875",
+            serie: "#750000"
         }
         this.switchSelected = this.switchSelected.bind(this)
         this.displaybtn = this.displaybtn.bind(this)
@@ -15,8 +20,8 @@ export default class Graph extends Component<{ title: string }, { selected: stri
         if (Array.isArray(this.props.children)) {
             return <div>
                 <p className={this.state.selected === "tout" ? styles.active : undefined} onClick={() => this.switchSelected("tout")}>Tout</p>
-                <p className={this.state.selected === "serie" ? styles.active : undefined} onClick={() => this.switchSelected("serie")}>Série</p>
-                <p className={this.state.selected === "film" ? styles.active : undefined} onClick={() => this.switchSelected("film")}>Film</p>
+                <p className={this.state.selected === "film" ? styles.active : undefined} style={{ color: this.color.film }} onClick={() => this.switchSelected("film")}>Film</p>
+                <p className={this.state.selected === "serie" ? styles.active : undefined} style={{ color: this.color.serie }} onClick={() => this.switchSelected("serie")}>Série</p>
             </div>
         }
     }
@@ -25,9 +30,9 @@ export default class Graph extends Component<{ title: string }, { selected: stri
             switch (this.state.selected) {
                 case "tout":
                     return this.props.children[0]
-                case "serie":
-                    return this.props.children[1]
                 case "film":
+                    return this.props.children[1]
+                case "serie":
                     return this.props.children[2]
             }
         }
@@ -39,14 +44,14 @@ export default class Graph extends Component<{ title: string }, { selected: stri
         })
     }
     render() {
-        return <div className={styles.graph}>
+        return <div className={styles.graph} style={this.props.solo ? { gridColumn: "1 / -1" } : undefined}>
             <div className={styles.header}>
-                <h1>{this.props.title}</h1>
+                <h2>{this.props.title}</h2>
                 {this.displaybtn()}
-                <div className="content">
-                </div>
             </div>
-            {this.displayGraph()}
+            <div className="content">
+                {this.displayGraph()}
+            </div>
         </div>
     }
 }

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import CalcStats from '../../global/db/CalcStat'
+import { CalcStats } from '../../global/db/CalcStat'
 import dbConnect from '../../global/db/database'
 import { MFilmVu, MFilmPasVu } from '../../global/db/schema'
 

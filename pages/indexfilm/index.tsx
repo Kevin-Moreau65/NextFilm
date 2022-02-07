@@ -179,7 +179,6 @@ export const getStaticProps = async () => {
         }
         resultTime += time
     }
-    console.log()
     return {
         props: {
             arrayresult,

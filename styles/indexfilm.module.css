@@ -3,9 +3,11 @@
         aspect-ratio: 7/10 !important;
         border-radius: 8px !important;
     }
+
     .main {
         grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)) !important;
     }
+
     .bouton h2, .boutonMobile .divH2 {
         font-size: 1.1em !important;
     }
@@ -16,9 +18,11 @@
         aspect-ratio: 7/10 !important;
         border-radius: 8px !important;
     }
+
     .main {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
     }
+
     .bouton h2, .boutonMobile .divH2 {
         font-size: 0.9em !important;
     }
@@ -35,6 +39,7 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+
     .body::-webkit-scrollbar {
         display: none;
     }
@@ -56,7 +61,7 @@
 }
 
 .body {
-    background-color: rgb(136, 136, 136);
+    background-color: var(--Background);
     position: absolute;
     width: 100%;
     top: 0;
