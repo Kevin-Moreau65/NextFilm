@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, ResponsiveContainer, Cell, Pie, PieChart } from "recharts";
+import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar, ResponsiveContainer, Cell, Pie, PieChart } from "recharts";
 import styles from './graph.module.css'
 
 export default class Graph extends Component<{ title: string, solo?: boolean, type: string, data: any, modulable?: boolean, nightMode?: boolean }, { selected: string }> {
@@ -27,15 +27,6 @@ export default class Graph extends Component<{ title: string, solo?: boolean, ty
         }
     }
     displayGraph() {
-        // if (Array.isArray(this.props.children)) {
-        //     switch (this.state.selected) {
-        //         case "tout":
-        //             return this.props.children[0]
-        //         case "film":
-        //             return this.props.children[1]
-        //         case "serie":
-        //             return this.props.children[2]
-        //     }
         if (this.props.type === "pie") {
             return <ResponsiveContainer width="100%" height={200}>
                 <PieChart>

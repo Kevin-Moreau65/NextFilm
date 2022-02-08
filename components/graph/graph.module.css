@@ -64,3 +64,8 @@
     text-decoration: underline;
     text-shadow: 1px 0px 0px black;
 }
+
+.content {
+    text-align: center;
+    font-size: larger;
+}

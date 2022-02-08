@@ -1,14 +1,14 @@
-import { Component, ReactNode } from "react";
-import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Component } from "react";
 import Graph from "../../components/graph/graph";
+import SimpleStat from "../../components/graph/simpleStat";
 import dbConnect from "../../global/db/database";
 import { MStat, Statistiques } from "../../global/db/schema";
 import { Default, Mobile } from "../../global/reponsive/function";
 import styles from '../../styles/stats.module.css'
 
-class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], arrayAnnee: Object[] }> {
+class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], arrayAnnee: Object[], note: any }> {
     color: { film: string; serie: string; };
-    constructor(props: { stats: Statistiques, arrayGenre: any[], arrayAnnee: Object[] }) {
+    constructor(props: { stats: Statistiques, arrayGenre: any[], arrayAnnee: Object[], note: any }) {
         super(props)
         this.color = {
             film: "#485875",
@@ -24,67 +24,17 @@ class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], array
                     <Graph title="Nombre de film/série" type="pie" data={{ tout: [{ name: "film", value: this.props.stats.film.total }, { name: "série", value: this.props.stats.serie.total }] }} />
                     <Graph title="Nombre de film/série par genre" type="bar" data={{ tout: this.props.arrayGenre }} solo={true} modulable={true} />
                     <Graph title="Nombre de film/série par année" type="bar" data={{ tout: this.props.arrayAnnee }} solo={true} modulable={true} />
+                    <SimpleStat title="Film/série moins bien noté" data={this.props.note.moins} modulable={true} displayValue="Note :" comparison="-" />
+                    <SimpleStat title="Film/série mieux noté" data={this.props.note.mieux} modulable={true} displayValue="Note :" comparison="+" />
                 </Default>
                 <Mobile>
                     <Graph title="Minute de film/série" type="pie" data={{ tout: [{ name: "film", value: this.props.stats.film.totalTime }, { name: "série", value: this.props.stats.serie.totalTime }] }} />
                     <Graph title="Nombre de film/série" type="pie" data={{ tout: [{ name: "film", value: this.props.stats.film.total }, { name: "série", value: this.props.stats.serie.total }] }} />
                     <Graph title="Nombre de film/série par genre" type="bar" data={{ tout: this.props.arrayGenre }} solo={true} modulable={true} nightMode={true} />
                     <Graph title="Nombre de film/série par année" type="bar" data={{ tout: this.props.arrayAnnee }} solo={true} modulable={true} nightMode={true} />
+                    <SimpleStat title="Film/série moins bien noté" data={this.props.note.moins} modulable={true} displayValue="Note :" comparison="-" nightMode={true} />
+                    <SimpleStat title="Film/série mieux noté" data={this.props.note.mieux} nightMode={true} modulable={true} displayValue="Note :" comparison="+" />
                 </Mobile>
-                {/*<Graph title="Nombre de film/série par année" solo={true}>
-                    <ResponsiveContainer width="100%" height={200}>
-                        <BarChart
-                            data={this.props.arrayGenre[0]}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid stroke="black" />
-                            <XAxis dataKey="name" stroke="black" />
-                            <YAxis stroke="black" />
-                            <Tooltip cursor={false} />
-                            <Bar dataKey="film" stackId="a" fill={this.color.film} />
-                            <Bar dataKey="serie" stackId="a" fill={this.color.serie} />
-                        </BarChart>
-                    </ResponsiveContainer>
-                    <ResponsiveContainer width="100%" height={200}>
-                        <BarChart
-                            data={this.props.arrayGenre[1]}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid stroke="black" />
-                            <XAxis dataKey="name" stroke="black" />
-                            <YAxis stroke="black" />
-                            <Tooltip cursor={false} />
-                            <Bar dataKey="nombre" fill={this.color.film} />
-                        </BarChart>
-                    </ResponsiveContainer>
-                    <ResponsiveContainer width="100%" height={200}>
-                        <BarChart
-                            data={this.props.arrayGenre[2]}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid stroke="black" />
-                            <XAxis dataKey="name" stroke="black" />
-                            <YAxis stroke="black" />
-                            <Tooltip cursor={false} />
-                            <Bar dataKey="nombre" fill={this.color.serie} />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </Graph> */}
             </div>
         </div>
     }
@@ -126,11 +76,15 @@ export const getStaticProps = async () => {
             arrayAnneeAll.find(x => x.name === key).serie = value
         }
     }
+    let mieuxNote = { film: { titre: stats.film.mieuxNote.titre, value: stats.film.mieuxNote.note }, serie: { titre: stats.serie.mieuxNote.titre, value: stats.serie.mieuxNote.note } }
+    let moinsNote = { film: { titre: stats.film.moinsNote.titre, value: stats.film.moinsNote.note }, serie: { titre: stats.serie.moinsNote.titre, value: stats.serie.moinsNote.note } }
+    console.log(mieuxNote)
     return {
         props: {
             stats: stats,
             arrayGenre: arrayGenreAll,
-            arrayAnnee: arrayAnneeAll
+            arrayAnnee: arrayAnneeAll,
+            note: { moins: moinsNote, mieux: mieuxNote }
         },
         revalidate: 30
     }
