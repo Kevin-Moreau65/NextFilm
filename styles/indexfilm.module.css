@@ -38,6 +38,7 @@
     .body {
         -ms-overflow-style: none;
         scrollbar-width: none;
+        color: white !important;
     }
 
     .body::-webkit-scrollbar {

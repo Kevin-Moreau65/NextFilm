@@ -1,5 +1,5 @@
 export interface Responsive {
-    children: JSX.Element
+    children: any;
 }
 export interface Props {
     children: any;

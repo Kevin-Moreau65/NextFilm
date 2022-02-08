@@ -2,9 +2,6 @@
   :root {
     --Background: rgb(0, 0, 0);
   }
-  * {
-    color: white;
-  }
 }
 
 :root {
