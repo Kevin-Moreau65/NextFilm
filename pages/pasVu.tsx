@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/link-passhref */
 import Head from 'next/head';
-import Film, { FilmOrSerie } from "../../components/film/film";
-import styles from '../../styles/indexfilm.module.css'
+import Film, { FilmOrSerie } from "../components/film/film";
+import styles from '../styles/indexfilm.module.css'
 import { Component, Fragment } from 'react';
-import opacity from '../../components/filmInfo/opacity.module.css'
-import GetInfo from '../../components/filmInfo/filmInfo';
+import opacity from '../components/filmInfo/opacity.module.css'
+import GetInfo from '../components/filmInfo/filmInfo';
 import { CSSTransition } from 'react-transition-group';
-import { Mobile, Default } from '../../global/reponsive/function'
+import { Mobile, Default, ClientOnly } from '../global/reponsive/function'
 import Link from 'next/link'
-import { MFilmPasVu } from '../../global/db/schema';
-import dbConnect from '../../global/db/database';
+import { MFilmPasVu } from '../global/db/schema';
+import dbConnect from '../global/db/database';
 class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boolean, info: FilmOrSerie }> {
     array: Array<FilmOrSerie>
     constructor(props: { arrayresult: FilmOrSerie[] }) {
@@ -40,18 +40,20 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[] }, { getInfo: boo
                     <title>Film</title>
                 </Head>
                 <Mobile>
-                    <div className={styles.MobHeader}>
-                        <div className={styles.MobBTN} style={{ left: "15px" }}>
-                            <h3>+</h3>
-                        </div>
-                        <Link href="/indexfilm">
-                            <div className={styles.MobBTN} style={{ right: "15px" }}>
-                                <h4>Pvu</h4>
+                    <ClientOnly>
+                        <div className={styles.MobHeader}>
+                            <div className={styles.MobBTN} style={{ left: "15px" }}>
+                                <h3>+</h3>
                             </div>
-                        </Link>
-                    </div>
+                            <Link href="/indexfilm">
+                                <div className={styles.MobBTN} style={{ right: "15px" }}>
+                                    <h4>Pvu</h4>
+                                </div>
+                            </Link>
+                        </div>
+                    </ClientOnly>
                 </Mobile>
-                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films <Link href="/indexfilm"><a className={styles.seen}>pas vu</a></Link> avec la salopette</h1>
+                <h1 style={{ textAlign: "center" }} key={"H1"}>Recap des films <Link href="/"><a className={styles.seen}>pas vu</a></Link> avec la salopette</h1>
                 <div className={styles.main} key={"MAIN"}>
                     {this.array.map((content: FilmOrSerie) => (
                         <Fragment key={content.id}>

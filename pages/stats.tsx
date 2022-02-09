@@ -1,10 +1,12 @@
+import Link from "next/link";
 import { Component } from "react";
-import Graph from "../../components/graph/graph";
-import SimpleStat from "../../components/graph/simpleStat";
-import dbConnect from "../../global/db/database";
-import { MStat, Statistiques } from "../../global/db/schema";
-import { Default, Mobile } from "../../global/reponsive/function";
-import styles from '../../styles/stats.module.css'
+import { useMediaQuery } from "react-responsive";
+import Graph from "../components/graph/graph";
+import SimpleStat from "../components/graph/simpleStat";
+import dbConnect from "../global/db/database";
+import { MStat, Statistiques } from "../global/db/schema";
+import { Default, Mobile } from "../global/reponsive/function";
+import styles from '../styles/stats.module.css'
 
 class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], arrayAnnee: Object[], note: any, longueur: any }> {
     color: { film: string; serie: string; };
@@ -17,7 +19,7 @@ class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], array
     }
     render() {
         return <div className={styles.main}>
-            <h1 style={{ textAlign: "center" }}>Statistique</h1>
+            <h1 style={{ textAlign: "center" }}>Statistique des films/séries <span style={{ textDecoration: "underline" }}><Link href="/">vu</Link></span></h1>
             <div className={styles.content}>
                 <Default>
                     <Graph title="Minute de film/série" type="pie" data={{ tout: [{ name: "film", value: this.props.stats.film.totalTime }, { name: "série", value: this.props.stats.serie.totalTime }] }} />
@@ -84,7 +86,6 @@ export const getStaticProps = async () => {
     let moinsNote = { film: { titre: stats.film.moinsNote.titre, value: stats.film.moinsNote.note }, serie: { titre: stats.serie.moinsNote.titre, value: stats.serie.moinsNote.note } }
     let plusCourt = { film: { titre: stats.film.plusCourt.titre, value: stats.film.plusCourt.duree }, serie: { titre: stats.serie.plusCourt.titre, value: stats.serie.plusCourt.duree } }
     let plusLong = { film: { titre: stats.film.plusLong.titre, value: stats.film.plusLong.duree }, serie: { titre: stats.serie.plusLong.titre, value: stats.serie.plusLong.duree } }
-    console.log(plusCourt, plusLong)
     return {
         props: {
             stats: stats,
