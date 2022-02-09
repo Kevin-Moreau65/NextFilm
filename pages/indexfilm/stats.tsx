@@ -6,9 +6,9 @@ import { MStat, Statistiques } from "../../global/db/schema";
 import { Default, Mobile } from "../../global/reponsive/function";
 import styles from '../../styles/stats.module.css'
 
-class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], arrayAnnee: Object[], note: any }> {
+class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], arrayAnnee: Object[], note: any, longueur: any }> {
     color: { film: string; serie: string; };
-    constructor(props: { stats: Statistiques, arrayGenre: any[], arrayAnnee: Object[], note: any }) {
+    constructor(props: { stats: Statistiques, arrayGenre: any[], arrayAnnee: Object[], note: any, longueur: any }) {
         super(props)
         this.color = {
             film: "#485875",
@@ -24,6 +24,8 @@ class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], array
                     <Graph title="Nombre de film/série" type="pie" data={{ tout: [{ name: "film", value: this.props.stats.film.total }, { name: "série", value: this.props.stats.serie.total }] }} />
                     <Graph title="Nombre de film/série par genre" type="bar" data={{ tout: this.props.arrayGenre }} solo={true} modulable={true} />
                     <Graph title="Nombre de film/série par année" type="bar" data={{ tout: this.props.arrayAnnee }} solo={true} modulable={true} />
+                    <SimpleStat title="Film/série plus court" data={this.props.longueur.court} modulable={true} displayValue="Minutes :" comparison="-" />
+                    <SimpleStat title="Film/série plus long" data={this.props.longueur.long} modulable={true} displayValue="Minutes :" comparison="+" />
                     <SimpleStat title="Film/série moins bien noté" data={this.props.note.moins} modulable={true} displayValue="Note :" comparison="-" />
                     <SimpleStat title="Film/série mieux noté" data={this.props.note.mieux} modulable={true} displayValue="Note :" comparison="+" />
                 </Default>
@@ -32,6 +34,8 @@ class Stats extends Component<{ stats: Statistiques, arrayGenre: Object[], array
                     <Graph title="Nombre de film/série" type="pie" data={{ tout: [{ name: "film", value: this.props.stats.film.total }, { name: "série", value: this.props.stats.serie.total }] }} />
                     <Graph title="Nombre de film/série par genre" type="bar" data={{ tout: this.props.arrayGenre }} solo={true} modulable={true} nightMode={true} />
                     <Graph title="Nombre de film/série par année" type="bar" data={{ tout: this.props.arrayAnnee }} solo={true} modulable={true} nightMode={true} />
+                    <SimpleStat title="Film/série plus court" data={this.props.longueur.court} modulable={true} displayValue="Minutes :" comparison="-" nightMode={true} />
+                    <SimpleStat title="Film/série plus long" data={this.props.longueur.long} modulable={true} displayValue="Minutes :" comparison="+" nightMode={true} />
                     <SimpleStat title="Film/série moins bien noté" data={this.props.note.moins} modulable={true} displayValue="Note :" comparison="-" nightMode={true} />
                     <SimpleStat title="Film/série mieux noté" data={this.props.note.mieux} nightMode={true} modulable={true} displayValue="Note :" comparison="+" />
                 </Mobile>
@@ -78,13 +82,16 @@ export const getStaticProps = async () => {
     }
     let mieuxNote = { film: { titre: stats.film.mieuxNote.titre, value: stats.film.mieuxNote.note }, serie: { titre: stats.serie.mieuxNote.titre, value: stats.serie.mieuxNote.note } }
     let moinsNote = { film: { titre: stats.film.moinsNote.titre, value: stats.film.moinsNote.note }, serie: { titre: stats.serie.moinsNote.titre, value: stats.serie.moinsNote.note } }
-    console.log(mieuxNote)
+    let plusCourt = { film: { titre: stats.film.plusCourt.titre, value: stats.film.plusCourt.duree }, serie: { titre: stats.serie.plusCourt.titre, value: stats.serie.plusCourt.duree } }
+    let plusLong = { film: { titre: stats.film.plusLong.titre, value: stats.film.plusLong.duree }, serie: { titre: stats.serie.plusLong.titre, value: stats.serie.plusLong.duree } }
+    console.log(plusCourt, plusLong)
     return {
         props: {
             stats: stats,
             arrayGenre: arrayGenreAll,
             arrayAnnee: arrayAnneeAll,
-            note: { moins: moinsNote, mieux: mieuxNote }
+            note: { moins: moinsNote, mieux: mieuxNote },
+            longueur: { long: plusLong, court: plusCourt }
         },
         revalidate: 30
     }
