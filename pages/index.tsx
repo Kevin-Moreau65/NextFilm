@@ -98,15 +98,15 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[], resultTime: numb
                             <div className={styles.MobBTN} style={{ left: "15px" }}>
                                 <h3 onClick={this.addFilm}>+</h3>
                             </div>
-                            <Link href="/indexfilm/pasVu">
-                                <div className={styles.MobBTN} style={{ right: "15px" }}>
+                            {/* <Link href="/indexfilm/pasVu">
+                                <div className={styles.MobBTN} style={{ right: "15px" }}> */}
                                     <h4>Vu</h4>
-                                </div>
-                            </Link>
+                                {/* </div>
+                            </Link> */}
                         </div>
                     </ClientOnly>
                 </Mobile>
-                <h1 style={{ textAlign: "center", padding: "0px 10px" }} key={"H1"}>Recap des films <Link href="pasVu"><a className={styles.seen}>vu</a></Link> avec la salopette</h1>
+                <h1 style={{ textAlign: "center", padding: "0px 10px" }} key={"H1"}>Recap des films {/*<Link href="pasVu"><a className={styles.seen}>*/}vu{/*</a></Link>*/} avec la salopette</h1>
                 <h1 style={{ textAlign: "center", padding: "0px 10px" }}><Link href="stats"><a className={styles.seen}>{this.time()}</a></Link> de contenu regardé !</h1>
                 <Default><h2 onClick={this.addFilm}>Ajouter</h2></Default>
                 <div className={styles.main} key={"MAIN"}>
@@ -138,7 +138,7 @@ export const getStaticProps = async () => {
         const result: FilmOrSerie = await res.json()
         arrayresult.push(result)
         const time = result.runtime ? result.runtime : result.episode_run_time[0] * result.number_of_episodes
-        resultTime += time
+        resultTime += time > 0 ? time : 0
     }
     return {
         props: {
