@@ -99,9 +99,9 @@ class Indexfilm extends Component<{ arrayresult: FilmOrSerie[], resultTime: numb
                                 <h3 onClick={this.addFilm}>+</h3>
                             </div>
                             {/* <Link href="/indexfilm/pasVu">
-                                <div className={styles.MobBTN} style={{ right: "15px" }}> */}
+                                <div className={styles.MobBTN} style={{ right: "15px" }}>
                                     <h4>Vu</h4>
-                                {/* </div>
+                                </div>
                             </Link> */}
                         </div>
                     </ClientOnly>
