@@ -65,6 +65,7 @@
     border: solid white 0.1px;
     border-radius: 5px;
     padding: 3px;
+    color: white;
 }
 
 .addMobile label {
