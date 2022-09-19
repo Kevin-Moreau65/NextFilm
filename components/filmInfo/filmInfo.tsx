@@ -56,7 +56,6 @@ function infoFilmRight(props: FilmOrSerie, back: MouseEventHandler) {
             </p>
             <h3 className={styles.back} onClick={back}>Retour</h3>
             <h4 className={styles.more}>{"<<"} En savoir plus</h4>
-            <h4 className={styles.back}>Supprimer</h4>
         </div>)
     } else {
         element = (<div className={styles.right}>
@@ -68,7 +67,6 @@ function infoFilmRight(props: FilmOrSerie, back: MouseEventHandler) {
             </p>
             <h3 className={styles.back} onClick={back}>Retour</h3>
             <h4 className={styles.more}>{"<<"} En savoir plus</h4>
-            <h4 className={styles.back}>Supprimer</h4>
         </div>)
     }
     return element
