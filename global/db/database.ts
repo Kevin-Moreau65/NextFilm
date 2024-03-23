@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
-const MONGODB_URI: string = process.env.MONGODB_URI as string;
+const MONGODB_URI: string = "mongodb+srv://Node:Pouzauges85@cluster0.t4d1c.mongodb.net/next-film?retryWrites=true&w=majority";
 
 if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
-  );
+    throw new Error(
+        'Please define the MONGODB_URI environment variable inside .env.local'
+    )
 }
 
 /**
@@ -14,10 +14,10 @@ if (!MONGODB_URI) {
  * during API Route usage.
  */
 async function dbConnect() {
-  let db = mongoose.connect(MONGODB_URI).then((mongoose) => {
-    return mongoose;
-  });
-  return db;
+    let db = mongoose.connect(MONGODB_URI).then((mongoose) => {
+        return mongoose
+    })
+    return db
 }
 
-export default dbConnect;
+export default dbConnect
